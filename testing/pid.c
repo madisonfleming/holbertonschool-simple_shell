@@ -1,13 +1,16 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/types.h>
 
-int main()
+/**
+ * main - PID
+ *
+ * Return: Always 0.
+ */
+int main(void)
 {
-	pid_t current_pid = getpid();
-	pid_t parent_pid = getppid();
+    pid_t my_pid;
 
-	printf("%u\n", current_pid);
-	printf("%u\n", parent_pid);
-return (0);
+    my_pid = getpid();
+    printf("%u\n", my_pid);
+    return (0);
 }
