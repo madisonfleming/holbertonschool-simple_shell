@@ -11,6 +11,8 @@
   * If overwrite is zero and name already exists, the function will not change its value
   * Return: 0 on success, -1 on error
   */
+extern char **environ;
+
 int _setenv(const char *name, const char *value, int overwrite)
 {
 	int i = 0;
@@ -18,7 +20,8 @@ int _setenv(const char *name, const char *value, int overwrite)
 	char *new_variable;
 
 	if (name == NULL || value == NULL)
-		return -1
+		return -1;
+
 	if (strchr(name, '=') != NULL)
 		return -1;
 
@@ -26,10 +29,8 @@ int _setenv(const char *name, const char *value, int overwrite)
 
 	while (environ[i] != NULL)
 	{
-
 		if (strncmp(environ[i], name, name_length) == 0 && environ [i][name_length] == '=')
 		{
-
 			if (overwrite == 0)
 				return 0;
 
@@ -42,17 +43,16 @@ int _setenv(const char *name, const char *value, int overwrite)
 		}
 		i++;
 	}
-
 	new_variable = malloc(name_length + strlen(value) + 2);
 	if (new_variable == NULL)
 		return -1;
 	sprintf(new_variable, "%s=%s", name, value);
 
-
-int env_count = 0;
-	while (environ[env_count] != NULL);
+	int env_count = 0;
+	char **new_environ;
+	while (environ[env_count] != NULL)
 	{
-		char **new_environ = malloc((env_count + 2) * sizeof(char *));
+		new_environ = malloc((env_count + 2) * sizeof(char *));
 		if (new_environ == NULL)
 		{
 			free(new_variable);
@@ -60,9 +60,8 @@ int env_count = 0;
 		}
 		env_count++;
 	}
-
-i = 0;
-	while (i < env_count;
+	i = 0;
+	while (i < env_count)
 	{
 		new_environ[i] = environ[i];
 		i++;
