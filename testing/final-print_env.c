@@ -3,9 +3,9 @@
 
 extern char **environ;
 
-int main(int ac, char **av, char **evp)
+int main(int ac, char **av, char **env)
 {
-	printf("evp: %p\n", (void *)evp);
+	printf("env: %p\n", (void *)env);
 	printf("environ: %p\n", (void *)environ);
 
 return (0);
