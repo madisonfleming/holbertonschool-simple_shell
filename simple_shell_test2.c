@@ -47,7 +47,7 @@ int main(int ac, char **av)
 			i++;
 			args[i] = strtok(NULL, " ");
 		}
-
+		args[i] = NULL;
 		/* Ignore empty input */
 		if (args[0] == NULL)
 			continue;
