@@ -29,12 +29,10 @@ int main(int ac, char **av)
 		read = getline(&line, &len, stdin);
 		if (read == -1)
 		{
-			if (interactive)
-			{
-				printf("\n");
-				fprintf(stderr, "%s: No such file or directory\n", av[0]);
-				exit(0); /* exit loop */
-			}
+			printf("\n");
+			fprintf(stderr, "%s: No such file or directory\n", av[0]);
+			free(line);
+			exit(0); /* exit loop */
 		}
 		/* Remove newline character */
 		line[strcspn(line, "\n")] = '\0';
@@ -44,6 +42,7 @@ int main(int ac, char **av)
 		args[i] = strtok(line, " ");
 		while (args[i] != NULL && i < 99)
 		{
+			printf("token input: %s", args[i]);
 			i++;
 			args[i] = strtok(NULL, " ");
 		}
